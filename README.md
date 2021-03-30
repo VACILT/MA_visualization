@@ -4,6 +4,9 @@ The main goal is to prepare new website visulization of meteor-radar station in 
 
 ## Roadmap
 - [ ] visualization of preprocessed meteor-radar files
+  - [ ] wind measurements
+  - [ ] tides
+  - [ ] daily temperatures derived from the decay of in-dividual underdense meteor trails (Hocking, 1999; Hockinget al., 2001)
 - [ ] processing of mdp files 
 - [ ] add visualization of other datasets
   - [ ] ICON@DWD (see [here](https://github.com/VACILT/PV_characteristics_ICON-NWP)) up to 80 km
