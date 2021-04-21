@@ -27,24 +27,14 @@ pn.extension()
 
 #root_path = '/projekt1/radar/webtool/'
 root_path = '/project/MA_vis/MA_visualization/data/'
-i_file = 3
 
 cascade_infiles = sorted(glob.glob(f'{root_path}*.h5'))
-cascade_infiles
 ds_wind = xr.open_mfdataset(cascade_infiles[0:11], concat_dim=['date'],group ='wind', combine = 'nested')
-ds_info = xr.open_dataset(cascade_infiles[i_file], group = 'info')
+ds_info = xr.open_dataset(cascade_infiles[0], group = 'info')
 dates=[]
 for i in cascade_infiles:
     dates.append(i[-13:-3])
 ds_wind['date'] = dates[0:11]
-
-# ## Getting Metadata
-
-year = int(ds_info['date'].values[0,0])
-month =int(ds_info['date'].values[1,0])
-day =int(ds_info['date'].values[2,0])
-date = str(day)+"."+str(month)+"."+str(year)
-date
 
 # ## Prepare Dateset
 
@@ -63,6 +53,16 @@ ds_wind['alt'].attrs['units'] = 'km'
 ds_wind['time'].attrs['units'] = 'h'
 ds_wind['time']=np.arange(1,25,1)
 #ds_wind
+
+# +
+hvc_opts = dict(x = 'time', y = 'alt')
+
+con_err_v = ds_wind['v_err'].hvplot.contour(**hvc_opts)
+con_err_u = ds_wind['u_err'].hvplot.contour(**hvc_opts)
+# -
+
+con_err_u
+
 graph_opts = dict(cmap = 'RdBu_r', symmetric=True, logy = False, colorbar = True)
 graph_top=ds_wind['u'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts)
 graph_bottom=ds_wind['v'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts)
@@ -82,8 +82,8 @@ def choise(date_sel):
 # -
 
 
-hv_panel_top = pn.panel(graph_top)
-hv_panel_bottom = pn.panel(graph_bottom)
+hv_panel_top = pn.panel(graph_top*con_err_v)
+hv_panel_bottom = pn.panel(graph_bottom*con_err_u)
 gspec = pn.GridSpec(width=800, height=600, margin=5)
 gspec[0:4, 0] = hv_panel_top[0]
 gspec[0:4, 1] = hv_panel_bottom[0]
