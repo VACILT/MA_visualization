@@ -14,16 +14,12 @@
 # ---
 
 import xarray as xr
-import pandas as pd
 import matplotlib.pyplot as plt
 import panel as pn
 import hvplot.xarray
-import holoviews as hv
 import glob
 import param
 import numpy as np
-hv.extension('bokeh')
-pn.extension()
 
 #root_path = '/projekt1/radar/webtool/'
 root_path = '/project/MA_vis/MA_visualization/data/'
