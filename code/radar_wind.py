@@ -57,7 +57,14 @@ con_err_v = ds_wind['v_err'].hvplot.contour(**hvc_opts)
 con_err_u = ds_wind['u_err'].hvplot.contour(**hvc_opts)
 # -
 
-con_err_u
+bars = ds_wind.hvplot.scatter(y=['u','v'], symmetric =True, hover=False, ylim=[-100,100]) \
+*ds_wind.hvplot.errorbars(y='u', yerr1='u_err') \
+*ds_wind.hvplot.errorbars(y='v', yerr1='v_err').opts(toolbar=None)
+
+
+bars
+
+hvplot.help('scatter')
 
 graph_opts = dict(cmap = 'RdBu_r', symmetric=True, logy = False, colorbar = True)
 graph_top=ds_wind['u'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts)
