@@ -2,6 +2,10 @@
 
 The main goal is to prepare new website visulization of meteor-radar station in Collm solely in python (see [here](https://meteo.physgeo.uni-leipzig.de/de/wetterdaten/radar.php)).
 
+Click on this Badge to get access to Binder. Binder sets up an environment without the need of an python-installation. It is possible to explore this project independent of the system!
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/VACILT/MA_visualization.git/HEAD)
+
 ## Roadmap
 - [ ] visualization of preprocessed meteor-radar files
   - [ ] wind measurements
