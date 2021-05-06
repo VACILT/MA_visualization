@@ -54,6 +54,10 @@ graph_opts = dict(cmap = 'RdBu_r', symmetric=True, logy = False, colorbar = True
 graph_top=ds_wind['u'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts)
 graph_bottom=ds_wind['v'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts)
 
+hvc_opts = dict(x = 'time', y = 'alt')
+con_err_v = ds_wind['v_err'].hvplot.contour(**hvc_opts)
+con_err_u = ds_wind['u_err'].hvplot.contour(**hvc_opts)
+
 
 @pn.depends(date_sel=date_selec.param.value)
 def choise(date_sel):

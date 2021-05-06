@@ -42,15 +42,28 @@ def fix_dataset(i):
     ds_wind['alt'] = ds_info['alt'].squeeze().values
     ds_wind['alt'].attrs['long_name'] = 'altitude'
     ds_wind['alt'].attrs['units'] = 'km'
-    ds_wind['time'].attrs['units'] = 'h'
     ds_wind['time']=np.arange(24*i+1,24*i+25,1)
+    ds_wind['time'].attrs['units'] = 'h'
+  
     return ds_wind
 
 
-array=xr.merge([fix_dataset(0)['u'], fix_dataset(1)['u'], fix_dataset(2)['u'], fix_dataset(3)['u']], compat='no_conflicts', join='outer')
-array
+array_u=xr.merge([fix_dataset(0)['u'], fix_dataset(1)['u'], fix_dataset(2)['u'], fix_dataset(3)['u']], compat='no_conflicts', join='outer')
+array_v=xr.merge([fix_dataset(0)['v'], fix_dataset(1)['v'], fix_dataset(2)['v'], fix_dataset(3)['v']], compat='no_conflicts', join='outer')
 
-plot=array['u'].plot(x='time', size=7)
+# +
+kwargs=dict(vmin=-100, vmax=100, cmap='seismic')
+plt.rcParams.update({'font.size': 14})
+f, ax = plt.subplots(ncols=1, nrows=2, figsize=(14, 8))
+plt.xticks(np.arange(0,108,12)) # no x ticks on top plot 
+top=array_u['u'].plot.pcolormesh(x='time', ax=ax[0], **kwargs)
+ax[0].get_xaxis().set_visible(False) #hide top axes
+bottom=array_v['v'].plot.pcolormesh(x='time', ax=ax[1], **kwargs)
+
+f.colorbar(top, ax=ax.ravel().tolist())
+plt.show()
+plt.close()
+# -
 
 
 
