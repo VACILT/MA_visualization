@@ -20,6 +20,7 @@ import hvplot.xarray
 import glob
 import param
 import numpy as np
+from bokeh.plotting import output_file
 
 #root_path = '/projekt1/radar/webtool/'
 root_path = '/project/MA_vis/MA_visualization/data/'
@@ -52,6 +53,8 @@ array_u=xr.merge([fix_dataset(0)['u'], fix_dataset(1)['u'], fix_dataset(2)['u'],
 array_v=xr.merge([fix_dataset(0)['v'], fix_dataset(1)['v'], fix_dataset(2)['v'], fix_dataset(3)['v']], compat='no_conflicts', join='outer')
 
 # +
+output_file('index.html')
+
 kwargs=dict(vmin=-100, vmax=100, cmap='seismic')
 plt.rcParams.update({'font.size': 14})
 f, ax = plt.subplots(ncols=1, nrows=2, figsize=(14, 8))
