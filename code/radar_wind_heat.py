@@ -60,8 +60,8 @@ graph_bottom=ds_wind['v'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_o
 #con_err_v
 # -
 
-hv_panel_top = pn.panel(graph_top*con_err_v)
-hv_panel_bottom = pn.panel(graph_bottom*con_err_u)
+hv_panel_top = pn.panel(graph_top)
+hv_panel_bottom = pn.panel(graph_bottom)
 gspec = pn.GridSpec(width=800, height=600, margin=5)
 gspec[0:1, 0] = hv_panel_top
 gspec[1:2, 0] = hv_panel_bottom
