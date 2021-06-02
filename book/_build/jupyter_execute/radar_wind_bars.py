@@ -15,6 +15,8 @@ import hvplot.xarray
 import glob
 import param
 import numpy as np
+from bokeh.plotting import figure, show, output_notebook
+output_notebook()
 
 
 # In[2]:
@@ -45,25 +47,25 @@ ds_wind['time'].attrs['units'] = f'days after {dates[0]}'
 # In[4]:
 
 
-def bars(alti):
-    bars = ds_wind.sel(alt=alti).hvplot.scatter(y=['u','v'], symmetric =True, ylim=[-100,100])     *ds_wind.sel(alt=alti).hvplot.errorbars(y='u', yerr1='u_err')     *ds_wind.sel(alt=alti).hvplot.errorbars(y='v', yerr1='v_err').opts(title=f'zonal (u) and meridional (v) flow in {alti} km')
-    return (bars)
+bars = ds_wind.hvplot.scatter(y=['u','v'], symmetric =True, ylim=[-100,100], groupby='alt')
 
 
 # In[5]:
 
 
-gspec = pn.GridSpec(width=800, height=600, margin=5)
-gspec[0:1, 0] = bars(80)
-gspec[1:2, 0] = bars(90)
-gspec[2:3, 0] = bars(100)
-gspec
+#hvplot.help('scatter')
 
 
 # In[6]:
 
 
-#hvplot.help('scatter')
+show(bars)
+
+
+# In[7]:
+
+
+bars
 
 
 # In[ ]:
