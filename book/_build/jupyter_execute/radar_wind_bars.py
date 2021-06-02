@@ -59,13 +59,18 @@ bars = ds_wind.hvplot.scatter(y=['u','v'], symmetric =True, ylim=[-100,100], gro
 # In[6]:
 
 
-show(bars)
+bars
 
 
 # In[7]:
 
 
-bars
+from bokeh.embed import file_html
+from bokeh.resources import CDN
+import IPython
+
+html_repr = file_html(pn.Column(bars).get_root(), CDN)
+IPython.display.HTML(html_repr)
 
 
 # In[ ]:
