@@ -17,22 +17,18 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-gspec = pn.GridSpec(width=800, height=800, margin=5)
-gspec[0:1, 0] = bars('A24v', 'p24v')
-gspec[1:2, 0] = bars('A12v', 'p12v')
-gspec[2:3, 0] = bars('A8v', 'p8v')
-gspec
+from bokeh.models.formatters import DatetimeTickFormatter
+formatter = DatetimeTickFormatter(months='%b %Y')
+sst.hvplot(xformatter=formatter)
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mNameError[0m                                 Traceback (most recent call last)
-[1;32m<ipython-input-4-8abd88b2882f>[0m in [0;36m<module>[1;34m[0m
-[0;32m      1[0m [0mgspec[0m [1;33m=[0m [0mpn[0m[1;33m.[0m[0mGridSpec[0m[1;33m([0m[0mwidth[0m[1;33m=[0m[1;36m800[0m[1;33m,[0m [0mheight[0m[1;33m=[0m[1;36m800[0m[1;33m,[0m [0mmargin[0m[1;33m=[0m[1;36m5[0m[1;33m)[0m[1;33m[0m[0m
-[1;32m----> 2[1;33m [0mgspec[0m[1;33m[[0m[1;36m0[0m[1;33m:[0m[1;36m1[0m[1;33m,[0m [1;36m0[0m[1;33m][0m [1;33m=[0m [0mbars[0m[1;33m([0m[1;34m'A24v'[0m[1;33m,[0m [1;34m'p24v'[0m[1;33m)[0m[1;33m[0m[0m
-[0m[0;32m      3[0m [0mgspec[0m[1;33m[[0m[1;36m1[0m[1;33m:[0m[1;36m2[0m[1;33m,[0m [1;36m0[0m[1;33m][0m [1;33m=[0m [0mbars[0m[1;33m([0m[1;34m'A12v'[0m[1;33m,[0m [1;34m'p12v'[0m[1;33m)[0m[1;33m[0m[0m
-[0;32m      4[0m [0mgspec[0m[1;33m[[0m[1;36m2[0m[1;33m:[0m[1;36m3[0m[1;33m,[0m [1;36m0[0m[1;33m][0m [1;33m=[0m [0mbars[0m[1;33m([0m[1;34m'A8v'[0m[1;33m,[0m [1;34m'p8v'[0m[1;33m)[0m[1;33m[0m[0m
-[0;32m      5[0m [0mgspec[0m[1;33m[0m[0m
-
-[1;31mNameError[0m: name 'bars' is not defined
-NameError: name 'bars' is not defined
+[1;32m<ipython-input-5-a4fb2a09591c>[0m in [0;36m<module>[1;34m[0m
+[0;32m      1[0m [1;32mfrom[0m [0mbokeh[0m[1;33m.[0m[0mmodels[0m[1;33m.[0m[0mformatters[0m [1;32mimport[0m [0mDatetimeTickFormatter[0m[1;33m[0m[0m
+[0;32m      2[0m [0mformatter[0m [1;33m=[0m [0mDatetimeTickFormatter[0m[1;33m([0m[0mmonths[0m[1;33m=[0m[1;34m'%b %Y'[0m[1;33m)[0m[1;33m[0m[0m
+[1;32m----> 3[1;33m [0msst[0m[1;33m.[0m[0mhvplot[0m[1;33m([0m[0mxformatter[0m[1;33m=[0m[0mformatter[0m[1;33m)[0m[1;33m[0m[0m
+[0m
+[1;31mNameError[0m: name 'sst' is not defined
+NameError: name 'sst' is not defined
 

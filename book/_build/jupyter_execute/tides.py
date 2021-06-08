@@ -30,20 +30,18 @@ ds_tides['alt'] = ds_info['alt'].squeeze().values
 ds_tides['alt'].attrs['units'] = 'km'
 restr = lambda x: int(x[0])
 year, month, day = map(restr, ds_info['date'].values)
-ds_tides['time']=pd.date_range(f'{year}-{month:02d}-{day:02d}', periods = ds_tides.time.shape[0], freq = 'D')
-
-
-#restr = lambda x: int(x[0])
-#year, month, day = map(restr, ds_info['date'].values)
-#pd.date_range(f'{year}-{month:02d}-{day:02d}', periods = ds_tides.time.shape[0], freq = 'D')
+ds_tides['time']=pd.date_range(f'{year}-{month:02d}-{day:02d}', periods = len(cascade_infiles)-1)
+ds_tides['A12u']
 
 
 # In[3]:
 
 
-graph_opts = dict(cmap = 'viridis', symmetric=True, logy = False, colorbar = True)
-graph_top=ds_tides['A12u'].hvplot.contourf(x = 'time', y = 'alt' ).opts(**graph_opts, title='u')
-graph_bottom=ds_tides['A12v'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts, title='v')#.redim.range(v=(-100, 100))
+levels=10
+
+graph_opts = dict(cmap = 'viridis', logy = False, colorbar = True)
+graph_top=ds_tides['A12v'].hvplot.contourf(by = 'time.hour',levels=10).opts(**graph_opts, title='u')
+graph_bottom=ds_tides['A12v'].hvplot.contourf(y = 'alt', by = 'time.day',levels=10 ).opts(**graph_opts, title='v')
 hv_panel_top = pn.panel(graph_top)
 hv_panel_bottom = pn.panel(graph_bottom)
 gspec = pn.GridSpec(width=800, height=600, margin=5)
@@ -56,9 +54,19 @@ gspec
 # In[4]:
 
 
-gspec = pn.GridSpec(width=800, height=800, margin=5)
-gspec[0:1, 0] = bars('A24v', 'p24v')
-gspec[1:2, 0] = bars('A12v', 'p12v')
-gspec[2:3, 0] = bars('A8v', 'p8v')
-gspec
+hvplot.help('contourf')
+
+
+# In[5]:
+
+
+from bokeh.models.formatters import DatetimeTickFormatter
+formatter = DatetimeTickFormatter(months='%b %Y')
+sst.hvplot(xformatter=formatter)
+
+
+# In[ ]:
+
+
+
 
