@@ -22,10 +22,10 @@ import pandas as pd
 
 root_path = '/project/MA_vis/MA_visualization/data/'
 cascade_infiles = sorted(glob.glob(f'{root_path}*.h5'))
-ds_info = xr.open_dataset(cascade_infiles[0],group ='info')
+ds_info = xr.open_dataset(cascade_infiles[0],group ='info', engine='netcdf4')
 ds_info['date']
-ds_tides = xr.open_mfdataset(cascade_infiles[0:11], concat_dim=['phony_dim_6'],group ='tides', combine = 'nested')
-ds_tides = ds_tides.rename({'phony_dim_5': 'alt','phony_dim_6': 'time'})
+ds_tides = xr.open_mfdataset(cascade_infiles[0:11], concat_dim=['phony_dim_7'],group ='tides', combine = 'nested', engine='netcdf4')
+ds_tides = ds_tides.rename({'phony_dim_6': 'alt','phony_dim_7': 'time'})
 ds_tides['alt'] = ds_info['alt'].squeeze().values
 ds_tides['alt'].attrs['units'] = 'km'
 restr = lambda x: int(x[0])
@@ -37,11 +37,9 @@ ds_tides['A12u']
 # In[3]:
 
 
-levels=10
-
 graph_opts = dict(cmap = 'viridis', logy = False, colorbar = True)
-graph_top=ds_tides['A12v'].hvplot.contourf(by = 'time.hour',levels=10).opts(**graph_opts, title='u')
-graph_bottom=ds_tides['A12v'].hvplot.contourf(y = 'alt', by = 'time.day',levels=10 ).opts(**graph_opts, title='v')
+graph_top=ds_tides['A12u'].hvplot.contour(x = 'time', y = 'alt', levels=25).opts(**graph_opts, title='u')
+graph_bottom=ds_tides['A12v'].hvplot.contour(y = 'alt', x = 'time', levels=25 ).opts(**graph_opts, title='v')
 hv_panel_top = pn.panel(graph_top)
 hv_panel_bottom = pn.panel(graph_bottom)
 gspec = pn.GridSpec(width=800, height=600, margin=5)
@@ -60,13 +58,5 @@ hvplot.help('contourf')
 # In[5]:
 
 
-from bokeh.models.formatters import DatetimeTickFormatter
-formatter = DatetimeTickFormatter(months='%b %Y')
-sst.hvplot(xformatter=formatter)
-
-
-# In[ ]:
-
-
-
+graph_bottom=ds_tides['A12v'].hvplot.contour(y = 'alt', x = 'time', levels=10 )
 

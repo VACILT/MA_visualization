@@ -22,8 +22,8 @@ import numpy as np
 
 root_path = '/project/MA_vis/MA_visualization/data/'
 cascade_infiles = sorted(glob.glob(f'{root_path}*.h5'))
-ds_wind = xr.open_mfdataset(cascade_infiles[0:11], concat_dim=['phony_dim_7'],group ='wind', combine = 'nested')
-ds_info = xr.open_dataset(cascade_infiles[0], group = 'info')
+ds_wind = xr.open_mfdataset(cascade_infiles[0:11], concat_dim=['phony_dim_8'],group ='wind', combine = 'nested', engine='netcdf4')
+ds_info = xr.open_dataset(cascade_infiles[0], group = 'info',  engine='netcdf4')
 dates=[]
 for i in cascade_infiles:
     dates.append(i[-13:-3])
@@ -33,8 +33,7 @@ for i in cascade_infiles:
 # In[3]:
 
 
-ds_info_2=xr.open_mfdataset(cascade_infiles[0:11], concat_dim=['phony_dim_7'],group ='wind', combine = 'nested')
-ds_wind = ds_wind.rename({'phony_dim_7': 'time', 'phony_dim_8': 'alt'})
+ds_wind = ds_wind.rename({'phony_dim_8': 'time', 'phony_dim_9': 'alt'})
 ds_wind['alt'] = ds_info['alt'].squeeze().values
 ds_wind['alt'].attrs['long_name'] = 'altitude'
 ds_wind['alt'].attrs['units'] = 'km'
