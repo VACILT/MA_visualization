@@ -1,6 +1,4 @@
-format: jb-article
-root: intro
-sections:
+- file: intro
 - file: radar_wind_heat
 - file: radar_wind_bars
 - file: tides
