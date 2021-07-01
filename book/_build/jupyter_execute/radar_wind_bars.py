@@ -45,8 +45,11 @@ ds_wind['time']=pd.date_range(start=f'{year}-{month:02d}-{day:02d}', end=f'{year
 # In[4]:
 
 
-bars = ds_wind.hvplot.scatter(y=['u','v'], symmetric =True, ylim=[-100,100], groupby='alt')
-#bars
+hvc_opts = dict(x = 'time', y = 'alt')
+con_err_v = ds_wind['v_err'].hvplot.contour(**hvc_opts)
+con_err_u = ds_wind['u_err'].hvplot.contour(**hvc_opts)
+bars = ds_wind.hvplot.scatter(y=['u','v'], symmetric =True, hover=False, ylim=[-100,100]) *ds_wind.hvplot.errorbars(y='u', yerr1='u_err') *ds_wind.hvplot.errorbars(y='v', yerr1='v_err').opts(toolbar=None)
+bars
 
 
 # In[5]:
@@ -60,10 +63,4 @@ hvplot.save(bars, 'bars.html')
 
 from IPython.display import HTML
 HTML(filename="bars.html")
-
-
-# In[ ]:
-
-
-
 

@@ -34,32 +34,26 @@ restr = lambda x: int(x[0])
 year, month, day = map(restr, ds_info['date'].values)
 year2, month2, day2 = map(restr, ds_info2['date'].values)
 ds_wind['time']=pd.date_range(start=f'{year}-{month:02d}-{day:02d}', end=f'{year2}-{month2:02d}-{day2:02d}', periods = (len(cascade_infiles)-1)*24)
-ds_wind['time']
 
 
 # In[3]:
 
 
 graph_opts = dict(cmap = 'RdBu_r', symmetric=True, logy = False, colorbar = True)
-graph_top=ds_wind['u'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts, title='u').redim.range(u=(-100, 100))
-graph_bottom=ds_wind['v'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts, title='v').redim.range(v=(-100, 100))
-hv_panel_top = pn.panel(graph_top)
-hv_panel_bottom = pn.panel(graph_bottom)
-gspec = pn.GridSpec(width=800, height=600, margin=5)
-gspec[0:1, 0] = hv_panel_top
-gspec[1:2, 0] = hv_panel_bottom
-#hv_panel_bottom.pprint()
-gspec
+graph_u=ds_wind['u'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts, title='u').redim.range(u=(-100, 100))
+graph_v=ds_wind['v'].hvplot.quadmesh(x = 'time', y = 'alt' ).opts(**graph_opts, title='v').redim.range(v=(-100, 100))
+heatmap=(graph_u + graph_v).cols(1)
 
 
 # In[4]:
 
 
-hvplot.save(graph_top, 'heatmap.html')
+hvplot.save(heatmap, 'heatmap.html')
 
 
-# In[ ]:
+# In[5]:
 
 
-
+from IPython.display import HTML
+HTML(filename="heatmap.html")
 
