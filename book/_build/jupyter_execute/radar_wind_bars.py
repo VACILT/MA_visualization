@@ -40,14 +40,13 @@ restr = lambda x: int(x[0])
 year, month, day = map(restr, ds_info['date'].values)
 year2, month2, day2 = map(restr, ds_info2['date'].values)
 ds_wind['time']=pd.date_range(start=f'{year}-{month:02d}-{day:02d}', end=f'{year2}-{month2:02d}-{day2:02d}', periods = (len(cascade_infiles)-1)*24)
-ds_wind['time']
 
 
 # In[4]:
 
 
 bars = ds_wind.hvplot.scatter(y=['u','v'], symmetric =True, ylim=[-100,100], groupby='alt')
-bars
+#bars
 
 
 # In[5]:
@@ -59,5 +58,12 @@ hvplot.save(bars, 'bars.html')
 # In[6]:
 
 
-hvplot.save(bars, 'bars.html')
+from IPython.display import HTML
+HTML(filename="bars.html")
+
+
+# In[ ]:
+
+
+
 
