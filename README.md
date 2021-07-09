@@ -8,8 +8,8 @@ Click on this Badge to get access to Binder. Binder sets up an environment witho
 
 ## Roadmap
 - [ ] visualization of preprocessed meteor-radar files
-  - [ ] wind measurements
-  - [ ] tides
+  - [x] wind measurements
+  - [x] tides
   - [ ] daily temperatures derived from the decay of in-dividual underdense meteor trails (Hocking, 1999; Hockinget al., 2001; [Stober et al., 2008](https://www.sciencedirect.com/science/article/abs/pii/S0273117707010629?via%3Dihub); [Jacobi et al. (2016)](https://ars.copernicus.org/articles/14/169/2016/))
   - [ ] long-term characteristics (trends, climatology etc.)
 - [ ] processing of mdp files 
