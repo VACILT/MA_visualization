@@ -212,8 +212,13 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-jupyter-notebook">
+   Using jupyter notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#from-notebook-to-book">
-   from notebook to book
+   From notebook to book
   </a>
  </li>
 </ul>
@@ -229,20 +234,51 @@
                 
   <div class="section" id="documentation">
 <h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
-<p>In this chapter, we want to show what you need to build plots like this.</p>
+<p>In this chapter, we want to show what you need to build plots like this. Note that it’s necessary to use the correct version and all requirements of the library itself.</p>
 <div class="section" id="data-reading">
 <h2>Data reading<a class="headerlink" href="#data-reading" title="Permalink to this headline">¶</a></h2>
-<p>Big meteorological data is often given as NET-CDF or .h5-file. <a class="reference external" href="http://xarray.pydata.org/en/stable/">x-array is</a> the perfect python-package to deal with such multi dimensional data.</p>
+<p>Big meteorological data is often given as NET-CDF or .h5-file. <a class="reference external" href="http://xarray.pydata.org/en/stable/">x-array</a> is the perfect python-package to deal with such multi dimensional data. When the data is smaller and in a tabular like shape, <a class="reference external" href="https://pandas.pydata.org/docs/getting_started/index.html#getting-started">pandas</a> is the way to go. <a class="reference external" href="https://geopandas.org/getting_started.html">Geopandas</a> helps matching geographic coordinates to basemaps and provides simple plotting. <a class="reference external" href="https://numpy.org/">numpy</a> is pretty much required for all the used libraries.</p>
+<p>We used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xarray</span>                    <span class="mf">0.18.2</span>
+<span class="n">geopandas</span>                 <span class="mf">0.9.0</span>       
+<span class="n">pandas</span>                    <span class="mf">1.2.4</span>
+<span class="n">numpy</span>                     <span class="mf">1.20.3</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="plotting">
 <h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
+<p>We used the PyData data containers in the first step, so it’s just logical to keep on this track. <a class="reference external" href="https://hvplot.holoviz.org/user_guide/Introduction.html">hvPlot</a> is the best way to use this connected libraries.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hvplot</span>                    <span class="mf">0.7.2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-jupyter-notebook">
+<h2>Using jupyter notebook<a class="headerlink" href="#using-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>An <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html">jupyter notebook</a> contains the code and documentation of our project. This browser-based application runs  code, shows in- and output and supports documentation cells based on markdown. Everything is stored in one single file (.ipynb), which provides superior clarity.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">notebook</span>                  <span class="mf">6.4.0</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="from-notebook-to-book">
-<h2>from notebook to book<a class="headerlink" href="#from-notebook-to-book" title="Permalink to this headline">¶</a></h2>
-<p>Jupyter notebooks provides a good mix of code interpreter and narrativ markdown cells. Sadly, it only runs in the local repository or online using binder.
-Preprozessing the dynamic notebook to a static books, gives accessibility to any visitor of this webside.</p>
-<p>Setup content as notebook-file (.ipynb) or markdown (.md). Provide some metadata to the _config.yml and create the table of contends (_toc.yml). Then the .html is created by jupyter-book:</p>
+<h2>From notebook to book<a class="headerlink" href="#from-notebook-to-book" title="Permalink to this headline">¶</a></h2>
+<p>An Jupyter notebook consists of a code interpreter and narrative markdown cells. Sadly, the code interpreter only runs in the local repository or online using binder.
+Pre-processing the dynamic notebook to a static book (<a class="reference external" href="https://jupyterbook.org/intro.html">jupyter book</a>), gives accessibility to any visitor of this website.</p>
+<ol class="simple">
+<li><p>Create a Folder (our: <a class="reference external" href="https://github.com/VACILT/MA_visualization/tree/main/book">/book</a>).</p></li>
+<li><p>Setup content as notebook-file (.ipynb) or markdown (.md).</p></li>
+<li><p>Provide some metadata to the <a class="reference external" href="https://github.com/VACILT/MA_visualization/blob/main/book/_config.yml">_config.yml</a>.</p></li>
+<li><p>create the table of content (<a class="reference external" href="https://github.com/VACILT/MA_visualization/blob/main/book/_toc.yml">_toc.yml</a>).</p></li>
+<li><p>go to the parent directory and run:</p></li>
+</ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="o">./</span><span class="n">book</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>The book will be created as html (<a class="reference external" href="https://github.com/VACILT/MA_visualization/tree/main/book/_build/html">see here</a>)</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span>              <span class="mf">0.11.1</span>
+
 </pre></div>
 </div>
 </div>
