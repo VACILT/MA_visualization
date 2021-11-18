@@ -1,6 +1,6 @@
 # Middle-atmosphere data processing and visualization
 
-The main goal is to prepare new website visulization of meteor-radar station in Collm solely in python (see [here](https://meteo.physgeo.uni-leipzig.de/de/wetterdaten/radar.php)).
+The main goal is to prepare new website visulization of meteor-radar station in Collm solely in python (see [here](https://wetterdaten.meteo.uni-leipzig.de/radar.php) or specifically [here](https://wetterdaten.meteo.uni-leipzig.de/radar_analyse.php)).
 
 Click on this Badge to get access to Binder. Binder sets up an environment without the need of an python-installation. It is possible to explore this project independent of the system!
 
